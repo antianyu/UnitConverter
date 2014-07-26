@@ -1,0 +1,75 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="UnitConverter.ConvertPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    Loaded="PhoneApplicationPage_Loaded"
+    shell:SystemTray.IsVisible="False"
+    Style="{StaticResource TransitionPageStyle}">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background.png" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <ProgressBar x:Name="WaitingBar" Width="480" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" IsIndeterminate="True" Visibility="Collapsed"/>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="Unit Converter" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Height="50" HorizontalAlignment="Center" Margin="0,45,0,0" Name="TipTextBlock" Text="点击单位以切换!" VerticalAlignment="Top" Width="255" FontSize="32"/>
+            <TextBlock Height="50" HorizontalAlignment="Center" Margin="0,59,0,0" Name="MinusTipTextBlock" Text="数值大于零时点击负号输入负数" VerticalAlignment="Top" Width="432" FontSize="28" Visibility="Collapsed" TextAlignment="Center"/>
+            <TextBlock FontSize="60" Height="70" HorizontalAlignment="Center" Margin="0,263,0,0" Name="EqualTextBlock" Text="=" VerticalAlignment="Top" Width="51" />
+            <TextBox Height="71" Margin="12,101,0,0" Name="LeftUnitTextBox" Text="0" VerticalAlignment="Top" Width="432" HorizontalAlignment="Left" InputScope="Number" TextAlignment="Right" TextChanged="LeftUnitTextBox_TextChanged" KeyDown="LeftUnitTextBox_KeyDown" GotFocus="LeftUnitTextBox_GotFocus" LostFocus="LeftUnitTextBox_LostFocus" />
+            <TextBox Height="71" Margin="12,368,0,0" Name="RightUnitTextBox" Text="0" VerticalAlignment="Top" Width="432" HorizontalAlignment="Left" InputScope="Number" TextAlignment="Right" TextChanged="RightUnitTextBox_TextChanged" KeyDown="RightUnitTextBox_KeyDown" GotFocus="RightUnitTextBox_GotFocus" LostFocus="RightUnitTextBox_LostFocus" />
+            <TextBlock FontSize="60" Height="83" HorizontalAlignment="Center" Name="LeftMinusTextBlock" Margin="12,90,374,0" Text="-" VerticalAlignment="Top" Width="70" Foreground="#32FFFFFF" TextAlignment="Center" Tap="LeftMinusTextBlock_Tap" Visibility="Collapsed"/>
+            <TextBlock FontSize="60" Height="83" HorizontalAlignment="Center" Name="RightMinusTextBlock" Margin="12,358,374,0" Text="-" VerticalAlignment="Top" Width="70" Foreground="#32FFFFFF" TextAlignment="Center" Tap="RightMinusTextBlock_Tap" Visibility="Collapsed"/>
+            <Button Content="Exchange" Height="87" HorizontalAlignment="Center" Margin="0,520,0,0" Name="ExchangeButton" VerticalAlignment="Top" Width="173" Click="ExchangeButton_Click" />
+            <Button Content="刷新汇率" Height="87" HorizontalAlignment="Center" Margin="0,520,0,0" Name="RateRefreshButton" VerticalAlignment="Top" Width="173" Click="RateRefreshButton_Click" Visibility="Collapsed"/>
+
+            <toolkit:ListPicker Height="71" HorizontalAlignment="Center" Margin="28,164,28,0" Name="LeftUnitPicker" VerticalAlignment="Top" Width="400" Background="{x:Null}" FontSize="32" BorderBrush="{x:Null}" ExpansionMode="FullScreenOnly" SelectionChanged="LeftUnitPicker_SelectionChanged">
+                <toolkit:ListPicker.FullModeItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Width="400" Height="70" Text="{Binding Name_Symbol}" VerticalAlignment="Center" TextAlignment="Center" FontSize="28"/>
+                    </DataTemplate>
+                </toolkit:ListPicker.FullModeItemTemplate>
+                <toolkit:ListPicker.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Height="70" Text="{Binding Name_Symbol}" VerticalAlignment="Center" TextAlignment="Center" Foreground="{StaticResource PhoneForegroundBrush}"/>
+                    </DataTemplate>
+                </toolkit:ListPicker.ItemTemplate>
+            </toolkit:ListPicker>
+            <toolkit:ListPicker Height="71" HorizontalAlignment="Center" Margin="0,431,0,0" Name="RightUnitPicker" VerticalAlignment="Top" Width="400" Background="{x:Null}" FontSize="32" BorderBrush="{x:Null}" ExpansionMode="FullScreenOnly" SelectionChanged="RightUnitPicker_SelectionChanged">
+                <toolkit:ListPicker.FullModeItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Width="400" Height="70" Text="{Binding Name_Symbol}" VerticalAlignment="Center" TextAlignment="Center" FontSize="28" />
+                    </DataTemplate>
+                </toolkit:ListPicker.FullModeItemTemplate>
+                <toolkit:ListPicker.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Height="70" Text="{Binding Name_Symbol}" VerticalAlignment="Center" TextAlignment="Center" Foreground="{StaticResource PhoneForegroundBrush}" />
+                    </DataTemplate>
+                </toolkit:ListPicker.ItemTemplate>
+            </toolkit:ListPicker>
+        </Grid>
+    </Grid>
+</phone:PhoneApplicationPage>

@@ -1,0 +1,73 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="UnitConverter.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False"
+    Style="{StaticResource TransitionPageStyle}">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background.png" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="146"/>
+            <RowDefinition Height="550*"/>
+        </Grid.RowDefinitions>
+        
+        <ProgressBar x:Name="WaitingBar" Width="480" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" IsIndeterminate="True" Visibility="Collapsed"/>
+        
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel x:Name="TitlePanel" Margin="12,17,0,0">
+            <TextBlock x:Name="ApplicationTitle" Text="Unit Converter" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="单位转换器" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Width="480" Margin="0,19,0,0">
+            <Grid Margin="0,0,0,0" Name="AppGrid" HorizontalAlignment="Stretch" Width="386">
+                <!--Grid's Column & Row-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="193"/>
+                    <ColumnDefinition Width="193"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="193"/>
+                    <RowDefinition Height="193"/>
+                    <RowDefinition Height="193"/>
+                    <RowDefinition Height="193"/>
+                    <RowDefinition Height="193"/>
+                    <!--<RowDefinition Height="193"/> -->
+                </Grid.RowDefinitions>
+                <!--Image Button Definitions-->
+                <Image Height="173" Width="173" Grid.Column="0" Grid.Row="0" Margin="0,0,0,0" Source="Images/Weight.png" Opacity="0.85" Tap="Weight_Tap" />
+                <Image Height="173" Width="173" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" Source="Images/Length.png" Opacity="0.85" Tap="Length_Tap" />
+                <Image Height="173" Width="173" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Source="Images/Area.png" Opacity="0.85" Tap="Area_Tap" />
+                <Image Height="173" Width="173" Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" Source="Images/Volume.png" Opacity="0.85" Tap="Volume_Tap" />
+                <Image Height="173" Width="173" Grid.Column="0" Grid.Row="2" Margin="0,0,0,0" Source="Images/Energy.png" Opacity="0.85" Tap="Energy_Tap" />
+                <Image Height="173" Width="173" Grid.Column="1" Grid.Row="2" Margin="0,0,0,0" Source="Images/Angle.png" Opacity="0.85" Tap="Angle_Tap" />
+                <Image Height="173" Width="173" Grid.Column="0" Grid.Row="3" Margin="0,0,0,0" Source="Images/Power.png" Opacity="0.85" Tap="Power_Tap" />
+                <Image Height="173" Width="173" Grid.Column="1" Grid.Row="3" Margin="0,0,0,0" Source="Images/Pressure.png" Opacity="0.85" Tap="Pressure_Tap" />
+                <Image Height="173" Width="173" Grid.Column="0" Grid.Row="4" Margin="0,0,0,0" Source="Images/Temperature.png" Opacity="0.85" Tap="Temperature_Tap" />
+                <Image Height="173" Width="173" Grid.Column="1" Grid.Row="4" Margin="0,0,0,0" Source="Images/Velocity.png" Opacity="0.85" Tap="Velocity_Tap" />
+                <!--<Image Height="173" Width="173" Grid.Column="0" Grid.Row="5" Margin="0,0,0,0" Source="Images/Currency.png" Opacity="0.85" Tap="Currency_Tap" />-->
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="true" IsMenuEnabled="False" BackgroundColor="#B4000000" Opacity="0.99" ForegroundColor="#CCFFFFFF">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.questionmark.rest.dark.png" Text="关于" Click="About_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
